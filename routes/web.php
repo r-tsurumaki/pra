@@ -23,4 +23,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('upload_tweet', [UploadTweetController::class, 'upload_tweet']);
+Route::get('/', function () {
+    return view('upload_tweet');
+});
