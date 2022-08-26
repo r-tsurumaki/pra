@@ -18,7 +18,7 @@ print("<a href='upload_form'>画像投稿フォームに戻る</a>");
 public function index()
 {
 //$upload_images = ::all();
-return view('list_tweet');
+return view('list_tweet'); 
 }
 }
 
