@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Tweet;
+
 class UploadTweetController extends Controller
 {
 /*  public function upload(Request $request){
@@ -16,11 +18,19 @@ class UploadTweetController extends Controller
     }*/
 
     public function list(){
-        //$upload_images = ::all();
-        return view('list_tweet');
+        $upload_images = Tweet::all();
+        return view('list_tweet', compact('upload_images'));
     }
 
-    public function upload(){
+    public function upload(Request $request, $id){
+        $tweet = Tweet::find($id);
+
+        $tweet->user_id = $request->user_id;
+        $tweet->text = $request->text;
+        $tweet->image_path = $request->image_path;
+
+        /* データベースに保存 */
+        $tweet->save();
         return view("upload_tweet");
     }
 
