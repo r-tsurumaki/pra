@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UploadTweetController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//下記urlは後で消す
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,8 +24,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    return view('upload_tweet');
-});
+//tweet関係のurl
+Route::get("/list_tweet", [UploadTweetController::class, "list"])->name("list");
+
+Route::get('/upload_tweet', [UploadTweetController::class, "upload"])->middleware(["auth"])->name("upload");
+
+Route::post("/complete_tweet", [UploadTweetController::class, "complete"])->middleware(["auth"]);
+
+Route::post("/edit_tweet", [UploadTweetController::class, "edit"])->middleware(["auth"]);
+
+Route::get("/delete_tweet", [UploadTweetController::class, "delete"])->middleware(["auth"]);
+
+require __DIR__.'/auth.php';
