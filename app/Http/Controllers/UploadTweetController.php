@@ -6,22 +6,7 @@ use Illuminate\Http\Request;
 
 class UploadTweetController extends Controller
 {
-<<<<<<< HEAD
-    /*public function upload(Request $request)
-{
-$request->validate([
-'image' => 'required|max:1024|mimes:jpg,jpeg,png,gif'
-]);
-$file_path = $request->image->store('images', 'public');
-print("<img src='". asset("$file_path"). "' width='300'>");
-print("<a href='upload_form'>画像投稿フォームに戻る</a>");
-}*/
-public function index()
-{
-//$upload_images = ::all();
-return view('list_tweet'); 
-}
-=======
+
 /*  public function upload(Request $request){
         $request->validate([
             'image' => 'required|max:1024|mimes:jpg,jpeg,png,gif'
@@ -51,7 +36,7 @@ return view('list_tweet');
     public function delete(){
         return view("delete_tweet");
     }
->>>>>>> 73ec02a34b3c961e96305bae87bf34b15ea65d3f
+
 }
 
 
