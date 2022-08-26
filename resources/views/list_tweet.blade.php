@@ -9,33 +9,31 @@
     <title>Document</title>
 </head>
 <body>
+    @auth
+    <a href="{{ route('login') }}">ログイン</a>
+    @endauth
+    @guest
+    <a href="{{ route("logout")}}">ログアウト</a>
+    @endguest
     <h1>ツイート一覧</h1>
 
 
-    @if ($message->count() > 0)
+@if ($upload_images->count() > 0)
     <table border="1">
         <tr>
             <th>ID</th>
+            <th>ユーザーID</th>
             <th>ツイート</th>
             <th>画像</th>
 
         </tr>
         {{-- @foreach ディレクティブで、1件ずつ処理 --}}
-        @foreach ($message as $contact)
+        @foreach ($upload_images as $contact)
             <tr>
-                {{-- <td>{{ $contact->id }}</td>
-                <td>{{ $contact->name }}</td>
-                <td>{{ $contact->my_address }}</td> --}}
-
-
-
-                {{-- <td><a href="/MessageBoard/edit/{{ $contact->id }}">編集</a></td> --}}
-                <td>
-                    <form action="/MessageBoard/delete/{{$contact->id}}" method="post">
-                        <input type="submit" value="削除" name="delete">
-                        @csrf
-                    </form>
-                </td>
+                <td>{{ $contact->id }}</td>
+                <td>{{ $contact->user_id }}</td>
+                <td>{{ $contact->text }}</td>
+                <td><img src="{{asset($contact->image_path)}}" alt=""></td>
             </tr>
         @endforeach
     </table>
@@ -44,7 +42,7 @@
 @endif
 
 
-<a href="/MessageBoard/top">トップへ戻る</a>
+<a href="top">トップへ戻る</a>
 
 
 </body>
