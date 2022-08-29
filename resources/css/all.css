@@ -1,212 +1,38 @@
 .fadeIn {
-  animation-name: fadeInAnime;
-  animation-fill-mode:backwards;
-  animation-duration:3s;
-  animation-iteration-count:infinite;
-  animation-timing-function:ease;
-  animation-delay: 0.5s;
-  animation-direction:normal;
-  }
-  
-
-  @keyframes fadeInAnime{
-    0% {
-      opacity: 0;
+    animation-name: fadeInAnime;
+    animation-fill-mode:backwards;
+    animation-duration:3s;
+    animation-iteration-count:infinite;
+    animation-timing-function:ease;
+    animation-delay: 0.5s;
+    animation-direction:normal;
     }
-  
-    100% {
-      opacity: 1;
+    
+
+    @keyframes fadeInAnime{
+      0% {
+        opacity: 0;
+      }
+    
+      100% {
+        opacity: 1;
+      }
     }
-  }
- 
-
-  *,
-*:before,
-*:after {
--webkit-box-sizing: inherit;
-box-sizing: inherit;
-}
-
-html {
--webkit-box-sizing: border-box;
-box-sizing: border-box;
-font-size: 62.5%;
-}
-
-.btn,
-a.btn,
-button.btn {
-font-size: 1.6rem;
-font-weight: 700;
-line-height: 1.5;
-position: relative;
-display: inline-block;
-padding: 1rem 4rem;
-cursor: pointer;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
--webkit-transition: all 0.3s;
-transition: all 0.3s;
-text-align: center;
-vertical-align: middle;
-text-decoration: none;
-letter-spacing: 0.1em;
-color: #212529;
-border-radius: 0.5rem;
-}
-
-a.btn-border {
-margin-bottom: 12px;
-padding: 10px;
-
--webkit-transition: all 0.3s;
-
-transition: all 0.3s;
-
-border: 2px solid #000;
-background-image: -webkit-repeating-linear-gradient(
-  135deg,
-  #000,
-  #000 1px,
-  transparent 2px,
-  transparent 5px
-);
-background-image: repeating-linear-gradient(
-  -45deg,
-  #000,
-  #000 1px,
-  transparent 2px,
-  transparent 5px
-);
-background-size: 7px 7px;
-
--webkit-backface-visibility: hidden;
-
-backface-visibility: hidden;
-}
-
-a.btn-border span {
-position: relative;
-
-display: block;
-
-padding: 1.25rem 3rem;
-
-color: #000;
-border: 2px solid #000;
-border-radius: 0.5rem;
-background: #fff;
-}
-
-a.btn-border:hover {
-margin: 4px 4px 12px;
-padding: 6px;
-}
-
-a.btn-sns {
-font-size: 2.4rem;
-line-height: 50px;
-
-width: 50px;
-height: 50px;
-padding: 0;
-
-letter-spacing: 0;
-
-color: #fff;
-border-radius: 50%;
-}
-
-a.btn-sns:hover {
-color: #fff;
-}
-
-a.btn-sns--twitter {
-background: #1da1f2;
-}
-input {
-  width: 300px;
-  text-align: center;
-  
-  
-}
-h2 {
-  position: relative;
-  padding: 1.5rem 1.5rem calc(1.5rem + 10px);
-  border: 2px solid #000;
-}
-
-h2:after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 10px;
-  content: '';
-  border-top: 2px solid #000;
-  background-image: -webkit-repeating-linear-gradient(135deg, #000, #000 1px, transparent 2px, transparent 5px);
-  background-image: repeating-linear-gradient(-45deg, #000, #000 1px, transparent 2px, transparent 5px);
-  background-size: 7px 7px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-@import url('https://fonts.googleapis.com/css?family=Calligraffitti|Open+Sans');
-
-html, body {
-height: 100%;
-background-color: #D0F0FF;
-}
-
-body {
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-}
-
-h1 {
-font-family: 'Calligraffitti';
-}
-
-h3 {
-font-family: 'Open Sans';
-}
-
-.sea {
-border: 3px dashed #000;
-}
-
-.LightWaves {
-animation: lightwaves 2s infinite;
-position: relative;
-}
-
-@keyframes lightwaves {
-  0%,100% { transform: translate(0,0); }
-  25%     { transform: translate(5px,5px); transform: scale(1.05); }
-  50%     { transform: translate(25px, 5px); }
-  75%     { transform: translate(12px,10px); transform: scale(1.05); }
-}
-
-.DarkWaves {
-animation: darkwaves 3.8s infinite;
-}
-
-@keyframes darkwaves {
-  0%,100% { transform: translate(0,0); }
-  25%     { transform: translate(25px, 5px); transform: scale(1.05); }
-  50%     { transform: translate(12px,10px); }
-  75%     { transform: translate(5px,5px); }
-}
-
-.WhiteWaves {
-animation: whitewaves 4s alternate ease infinite;
-}
-
-@keyframes whitewaves {
-  0% { transform: translate(0,25px); }
-  100%     { transform: translate(25px,35px); }
-} 
+    body {
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      height: 100vh;
+    }
+    
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
