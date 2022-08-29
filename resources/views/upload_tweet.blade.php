@@ -13,14 +13,14 @@
         <div>
             <label for="image">
                 <p>アップロード画像</p>
-                <!--<input id="image" type="file" name="image">-->
+                <input id="image_path" type="file" name="image">
             </label>
         </div>
 
         <div>
             <label for="memo">
                 <p>投稿文</p>
-                <!--<textarea name="memo" id="memo" cols="50" rows="10"></textarea>-->
+                <textarea name="text" id="memo" cols="50" rows="10"></textarea>
             </label>
         </div>
 

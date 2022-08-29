@@ -26,14 +26,18 @@ Route::get('/dashboard', function () {
 
 
 //tweet関係のurl
-Route::get("/list_tweet", [UploadTweetController::class, "list"])->name("list");
+Route::get("/list_tweet", [UploadTweetController::class, "list"])->middleware(["auth"])->name("list");
 
-Route::get('/upload_tweet', [UploadTweetController::class, "upload"])->middleware(["auth"])->name("upload");
+Route::get('/upload_tweet', function(){
+    return view("upload_tweet");
+})->middleware(["auth"])->name("upload");
+
+Route::post('/upload_tweet', [UploadTweetController::class, "upload"])->middleware(["auth"])->name("upload");
 
 Route::post("/complete_tweet", [UploadTweetController::class, "complete"])->middleware(["auth"]);
 
 Route::post("/edit_tweet", [UploadTweetController::class, "edit"])->middleware(["auth"]);
 
-Route::get("/delete_tweet", [UploadTweetController::class, "delete"])->middleware(["auth"]);
+Route::post("/delete_tweet", [UploadTweetController::class, "delete"])->middleware(["auth"]);
 
 require __DIR__.'/auth.php';

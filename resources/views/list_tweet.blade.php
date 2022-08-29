@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,31 +10,50 @@
 </head>
 <body>
     @auth
-    <a href="{{ route('login') }}">ログイン</a>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
+            {{ __('Log Out') }}
+        </button>
+    </form>
     @endauth
     @guest
-    <a href="{{ route("logout")}}">ログアウト</a>
+    <a href="{{ route('login') }}">ログイン</a>
     @endguest
     <h1>ツイート一覧</h1>
 
-
-@if ($upload_images->count() > 0)
+<a href="/upload_tweet">tweetする</a>
+@if($list->count() > 0)
     <table border="1">
         <tr>
             <th>ID</th>
             <th>ユーザーID</th>
             <th>ツイート</th>
             <th>画像</th>
-
+            <th>削除</th>
         </tr>
         {{-- @foreach ディレクティブで、1件ずつ処理 --}}
-        @foreach ($upload_images as $contact)
-            <tr>
-                <td>{{ $contact->id }}</td>
-                <td>{{ $contact->user_id }}</td>
-                <td>{{ $contact->text }}</td>
-                <td><img src="{{asset($contact->image_path)}}" alt=""></td>
-            </tr>
+        @foreach ($list as $item)
+        <tr>
+            <td>{{ $item->id }}</td>
+            <td>{{ $item->users->name }}</td>
+            <td>{!! nl2br(e($item->text)) !!}</td>
+            <td><img src="@if( !empty($item->image_path) ) {{ $item->image_path }} @endif"></td>
+            <td>
+                <form action="/edit_tweet" method="post">
+                    <input type="hidden" name="id" value="{{ $item->id }}">
+                    <input type="submit" value="編集">
+                    @csrf
+                </form>
+            </td>
+            <td>
+                <form action="/delete_tweet" method="post">
+                    <input type="hidden" name="id" value="{{ $item->id }}">
+                    <input type="submit" name="delete" value="削除">
+                    @csrf
+                </form>
+            </td>
+        </tr>
         @endforeach
     </table>
 @else
