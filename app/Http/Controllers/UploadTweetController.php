@@ -9,19 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UploadTweetController extends Controller
 {
-<<<<<<< HEAD
-
-/*  public function upload(Request $request){
-        $request->validate([
-            'image' => 'required|max:1024|mimes:jpg,jpeg,png,gif'
-        ]);
-        $file_path = $request->image->store('images', 'public');
-        print("<img src='". asset("$file_path"). "' width='300'>");
-        print("<a href='upload_form'>画像投稿フォームに戻る</a>");
-    }*/
-
-=======
->>>>>>> f9934d474dfd73c9bc55859c02cb8e713687737b
     public function list(){
         $list = Tweet::all();
         return view('list_tweet', compact('list'));
@@ -57,18 +44,8 @@ class UploadTweetController extends Controller
             $tweet -> text = $request -> text;
             $tweet -> image_path = $request -> image -> store("images", "public");
             $tweet -> save();
-
-<<<<<<< HEAD
-    public function delete(){
-        return view("delete_tweet");
-    }
-
-}
-=======
             return redirect("list_tweet");
         }
->>>>>>> f9934d474dfd73c9bc55859c02cb8e713687737b
-
         return view("edit_tweet", compact("tweet"));
     }
 
