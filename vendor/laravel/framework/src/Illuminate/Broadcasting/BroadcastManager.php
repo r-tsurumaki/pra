@@ -168,19 +168,13 @@ class BroadcastManager implements FactoryContract
             $queue = $event->queue;
         }
 
-        $broadcastEvent = new BroadcastEvent(clone $event);
-
-        if ($event instanceof ShouldBeUnique) {
-            $broadcastEvent = new UniqueBroadcastEvent(clone $event);
-
-            if ($this->mustBeUniqueAndCannotAcquireLock($broadcastEvent)) {
-                return;
-            }
+        if ($this->mustBeUniqueAndCannotAcquireLock($event)) {
+            return;
         }
 
         $this->app->make('queue')
-            ->connection($event->connection ?? null)
-            ->pushOn($queue, $broadcastEvent);
+                ->connection($event->connection ?? null)
+                ->pushOn($queue, new BroadcastEvent(clone $event));
     }
 
     /**
@@ -191,6 +185,10 @@ class BroadcastManager implements FactoryContract
      */
     protected function mustBeUniqueAndCannotAcquireLock($event)
     {
+        if (! $event instanceof ShouldBeUnique) {
+            return false;
+        }
+
         return ! (new UniqueLock(
             method_exists($event, 'uniqueVia')
                 ? $event->uniqueVia()

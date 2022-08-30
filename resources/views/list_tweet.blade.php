@@ -30,6 +30,7 @@
             <th>ユーザーID</th>
             <th>ツイート</th>
             <th>画像</th>
+            <th>編集</th>
             <th>削除</th>
         </tr>
         {{-- @foreach ディレクティブで、1件ずつ処理 --}}
@@ -39,6 +40,14 @@
             <td>{{ $item->users->name }}</td>
             <td>{!! nl2br(e($item->text)) !!}</td>
             <td><img src="@if( !empty($item->image_path) ) {{ $item->image_path }} @endif"></td>
+            <td>
+                <form action="/good_tweet" method="post">
+                    <span>{{ $item->good }}<span>
+                    <input type="hidden" name="tweet_id" value="{{ $item->id }}">
+                    <input type="submit" value="good">
+                    @csrf
+                </form>
+            </td>
             <td>
                 <form action="/edit_tweet" method="post">
                     <input type="hidden" name="id" value="{{ $item->id }}">
@@ -59,10 +68,6 @@
 @else
     <p>投稿がありません</p>
 @endif
-
-
-<a href="top">トップへ戻る</a>
-
 
 </body>
 </html>
