@@ -2,15 +2,35 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
             </a>
+
+            <style>
+                h1 {
+                        background-color: #e74c3c;
+                        animation: bg-color 0.75s infinite;
+                    }
+                    @keyframes bg-color {
+                        0% { color: red }
+                        20% { color: yellow; }
+                        40% { color: green; }
+                        60% { color: blue; }
+                        80% { color: purple; }
+                        100% { color: red; }
+                    }
+                </style>
         </x-slot>
+
+        <h1>登録</h1>
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+
+
+
 
             <!-- Name -->
             <div>
@@ -47,7 +67,7 @@
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                    {{-- {{ __('Already registered?') }} --}}
                 </a>
 
                 <x-button class="ml-4">
