@@ -37,13 +37,17 @@ class UploadTweetController extends Controller
 
     public function edit(Request $request){
         $tweet = Tweet::find($request -> id);
-        if($request -> mode == "update"){
-            $tweet -> text = $request -> text;
-            $tweet -> image_path = $request -> image -> store("images", "public");
-            $tweet -> save();
-            return redirect("list_tweet");
+        if( Auth::id() == $tweet -> user_id ){
+            if($request -> mode == "update"){
+                $tweet -> text = $request -> text;
+                $tweet -> image_path = $request -> image -> store("images", "public");
+                $tweet -> save();
+                return redirect("list_tweet");
+            }
+            return view("edit_tweet", compact("tweet"));
+        }else{
+            return redirect("/list_tweet");
         }
-        return view("edit_tweet", compact("tweet"));
     }
 
     public function delete(Request $request){
