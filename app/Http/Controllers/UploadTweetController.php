@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Tweet;
+use App\Models\Good;
 use Illuminate\Support\Facades\Auth;
 
 class UploadTweetController extends Controller
@@ -34,10 +35,6 @@ class UploadTweetController extends Controller
         return redirect("/list_tweet");
     }
 
-    public function complete(){
-        return view("complete_tweeet");
-    }
-
     public function edit(Request $request){
         $tweet = Tweet::find($request -> id);
         if($request -> mode == "update"){
@@ -54,6 +51,37 @@ class UploadTweetController extends Controller
 
         $tweet_to_delete->delete();
 
-        return redirect('list_tweet');
+        return redirect('/list_tweet');
+    }
+
+    public function good(Request $request){
+        $good_check = Good::where("tweet_id", "=", $request->tweet_id)->where("user_id", "=", Auth::id())->first();
+        if( is_null($good_check) ){
+            $new_good = new Good();
+            $new_good -> tweet_id = $request -> tweet_id;
+            $new_good -> user_id = Auth::id();
+            $new_good -> check = True;
+            $new_good -> save();
+
+            $tweet_good = Tweet::find($request->tweet_id);
+            $tweet_good -> good += 1;
+            $tweet_good -> save();
+        }else if($good_check -> check == True){
+            $good_check -> check = False;
+            $good_check -> save();
+
+            $tweet_good = Tweet::find($request->tweet_id);
+            $tweet_good -> good -= 1;
+            $tweet_good -> save();
+        }else{
+            $good_check -> check = True;
+            $good_check -> save();
+
+            $tweet_good = Tweet::find($request->tweet_id);
+            $tweet_good -> good += 1;
+            $tweet_good -> save();
+        }
+
+        return redirect("/list_tweet");
     }
 }

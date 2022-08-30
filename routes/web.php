@@ -40,4 +40,6 @@ Route::post("/edit_tweet", [UploadTweetController::class, "edit"])->middleware([
 
 Route::post("/delete_tweet", [UploadTweetController::class, "delete"])->middleware(["auth"]);
 
+Route::post("/good_tweet", [UploadTweetController::class, "good"])->middleware(["auth"]);
+
 require __DIR__.'/auth.php';
