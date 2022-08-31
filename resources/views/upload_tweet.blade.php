@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/upload.css') }}" >
-    <title>Upload|tweet</title>
+    <title>Upload | つぶやきアプリ</title>
 </head>
 <body>
     <h2 style="text-align:center">画像アップロードフォーム</h2>
@@ -88,6 +88,12 @@
                 <p>ツイート内容</p>
                 <textarea name="text" id="memo" cols="50" rows="10"></textarea>
             </label>
+        </div>
+
+        <div>
+            @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
         </div>
 
         <div>

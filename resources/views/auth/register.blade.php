@@ -1,5 +1,6 @@
 <x-guest-layout>
     <x-auth-card>
+        <link rel="stylesheet" href="style.css" >
         <x-slot name="logo">
             <a href="/">
                 {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
@@ -7,7 +8,7 @@
 
             <style>
                 h1 {
-                        background-color: #e74c3c;
+                        background-color: #dedcdc;
                         animation: bg-color 0.75s infinite;
                     }
                     @keyframes bg-color {
@@ -23,6 +24,9 @@
 
         <h1>登録</h1>
 
+
+
+
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -30,27 +34,27 @@
             @csrf
 
 
-
+            <h1></h1>
 
             <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
-
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            <div class="wrapper">
+                {{-- <x-label for="name" :value="__('Name')" /> --}}
+                <h1 id = "name">Name</p>
+                <input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                <h1 id = "email">Email</p>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <h1 id = "password">password</p>
 
-                <x-input id="password" class="block mt-1 w-full"
+                <input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
                                 required autocomplete="new-password" />
@@ -58,9 +62,8 @@
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
+                <h1 id = "password_confirmation">Confirm Password</p>
+                <input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
                                 name="password_confirmation" required />
             </div>
