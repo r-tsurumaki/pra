@@ -36,6 +36,8 @@ Route::post('/upload_tweet', [UploadTweetController::class, "upload"])->middlewa
 
 Route::post("/complete_tweet", [UploadTweetController::class, "complete"])->middleware(["auth"]);
 
+Route::get("/edit_tweet", [UploadTweetController::class, "edit"])->middleware(["auth"]);
+
 Route::post("/edit_tweet", [UploadTweetController::class, "edit"])->middleware(["auth"]);
 
 Route::post("/delete_tweet", [UploadTweetController::class, "delete"])->middleware(["auth"]);

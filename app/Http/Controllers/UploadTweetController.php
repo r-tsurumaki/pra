@@ -18,7 +18,7 @@ class UploadTweetController extends Controller
     public function upload(Request $request){
         $request -> validate([
             "image_path" => "mimes:jpg, jpeg, png, gif",
-            "text" => "required|max:255"
+            "text" => "required"
         ]);
         $tweet = new Tweet();
 
@@ -37,23 +37,32 @@ class UploadTweetController extends Controller
 
     public function edit(Request $request){
         $tweet = Tweet::find($request -> id);
-        if( Auth::id() == $tweet -> user_id ){
-            if($request -> mode == "update"){
-                $tweet -> text = $request -> text;
-                $tweet -> image_path = $request -> image -> store("images", "public");
-                $tweet -> save();
-                return redirect("list_tweet");
+        if($request -> mode == "update"){
+            $request -> validate([
+                "image_path" => "mimes:jpg, jpeg, png, gif",
+            ]);
+            $tweet -> text = $request -> text;
+            if( !is_null($request->image_path) ){
+                $tweet -> image_path = $request -> image_path -> store("images", "public");
             }
-            return view("edit_tweet", compact("tweet"));
-        }else{
+            $tweet -> save();
             return redirect("/list_tweet");
         }
+
+
+        if( Auth::id() == $tweet->user_id ){
+            return view("edit_tweet", compact("tweet"));
+        }
+
+        return redirect("/list_tweet");
     }
 
     public function delete(Request $request){
-        $tweet_to_delete = Tweet::find($request->id);
-
-        $tweet_to_delete->delete();
+        $tweet = Tweet::find($request -> id);
+        if( Auth::id() == $tweet->user_id ){
+            $tweet_to_delete = Tweet::find($request->id);
+            $tweet_to_delete->delete();
+        }
 
         return redirect('/list_tweet');
     }
