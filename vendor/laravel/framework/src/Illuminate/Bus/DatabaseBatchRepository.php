@@ -76,7 +76,6 @@ class DatabaseBatchRepository implements PrunableBatchRepository
     public function find(string $batchId)
     {
         $batch = $this->connection->table($this->table)
-                            ->useWritePdo()
                             ->where('id', $batchId)
                             ->first();
 
